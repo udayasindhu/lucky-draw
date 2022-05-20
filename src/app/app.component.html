@@ -1,0 +1,64 @@
+<header>
+  {{'WelcomeToTheLuckyValley' | translate}}..
+  <select
+    name="langs"
+    id="langs"
+    class="form-control"
+    (change)="switchLang($event)"
+  >
+    <option value="en">English</option>
+    <option value="hi">Hindi</option>
+    <option value="kn">Kannada</option>
+    <option value="ml">Malayalam</option>
+    <option value="ta">Tamil</option>
+    <option value="te">Telugu</option>
+  </select>
+</header>
+<div class="container">
+  <div class="container-fluid half-width">
+    <div *ngIf="luckyAlert" class="alert alert-success half-width">
+      {{'WowCongratsYouAreTheWinner' | translate}}☆(❁‿❁)☆
+    </div>
+    <div *ngIf="unluckyAlert" class="alert alert-danger half-width">
+      {{'BetterNextLuckTime' | translate}} {{userName}} (｡•́︿•̀｡)
+      {{'TheLuckyNumberIs' | translate}} {{luckyNumber}}
+    </div>
+    <div class="form-group">
+      <label for="playerName">{{'EnterYourName' | translate}}</label>
+      <input
+        type="text"
+        class="form-control"
+        ngModel
+        id="playerName"
+        name="playerName"
+        #playerName="ngModel"
+        placeholder="{{'PleaseEnterYourName' | translate}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="playerNum">{{'EnterYourLuckyNumber'| translate}}!</label>
+      <input
+        type="number"
+        class="form-control"
+        ngModel
+        id="playerNum"
+        name="playerNum"
+        #playerNum="ngModel"
+        pattern="[0-9]{1,2}"
+        maxlength="2"
+        max="10"
+        placeholder="{{'PleaseEnterANumberBetween1and10' | translate}}"
+      />
+      <div class="alert alert-danger" *ngIf="playerNum.errors">
+        {{'PleaseEnterANumberBetween1and10' | translate}}
+      </div>
+    </div>
+    <button
+      class="btn mt-4 clickMe"
+      (click)="getLuckyNumber(playerName,playerNum)"
+    >
+      {{'ClickMe' | translate}}!
+    </button>
+  </div>
+</div>
+<footer class="footer">{{'CheckYourLuckToday' | translate}}!</footer>
